@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InicioView: View {
     var body: some View {
-        Text("Inicio")
+        ListOf()
     }
 }
 
