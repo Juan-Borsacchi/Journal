@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AppTab: Hashable {
-    case inicio, diario, rotinas, search
+    case inicio, diario, rotinas, search, newEntry
 }
 
 enum Route: Hashable {
@@ -32,8 +32,21 @@ final class Router {
             diarioPath.removeAll()
         case .rotinas:
             rotinasPath.removeAll()
-        case .search:
+        case .search, .newEntry:
             break
+        }
+    }
+    
+    func push(_ route: Route, on tab: AppTab) {
+        switch tab {
+        case .inicio:
+            inicioPath.append(route)
+        case .diario:
+            diarioPath.append(route)
+        case .rotinas:
+            rotinasPath.append(route)
+        case .search, .newEntry:
+            inicioPath.append(route) // fallback de segurança
         }
     }
     
