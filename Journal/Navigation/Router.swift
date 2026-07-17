@@ -24,6 +24,8 @@ final class Router {
     var diarioPath: [Route] = []
     var rotinasPath: [Route] = []
     
+    var showNewEntry: Bool = false
+    
     func popToRoot(_ tab: AppTab) {
         switch tab {
         case .inicio:

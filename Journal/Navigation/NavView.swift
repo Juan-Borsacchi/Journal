@@ -50,9 +50,13 @@ struct NavView: View {
         }
         .onChange(of: router.selectedTab) { oldTab, newTab in
             if newTab == .newEntry {
-                router.push(Route.newEntry, on: oldTab)
-                
                 router.selectedTab = oldTab
+                router.showNewEntry = true
+            }
+        }
+        .fullScreenCover(isPresented: $router.showNewEntry) {
+            NavigationStack {
+                NewRegisterView()
             }
         }
     }
