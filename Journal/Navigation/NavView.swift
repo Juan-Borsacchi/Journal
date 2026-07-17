@@ -16,6 +16,10 @@ struct NavView: View {
 
         TabView(selection: $router.selectedTab) {
 
+            Tab("Novo", systemImage: "plus.circle.fill", value: AppTab.newEntry) {
+                EmptyView()
+            }
+            
             Tab("Inicio", systemImage: "house.fill", value: AppTab.inicio) {
                 NavigationStack(path: $router.inicioPath) {
                     InicioView()
@@ -42,6 +46,13 @@ struct NavView: View {
                     EmptyView()
                         .searchable(text: $query)
                 }
+            }
+        }
+        .onChange(of: router.selectedTab) { oldTab, newTab in
+            if newTab == .newEntry {
+                router.push(Route.newEntry, on: oldTab)
+                
+                router.selectedTab = oldTab
             }
         }
     }

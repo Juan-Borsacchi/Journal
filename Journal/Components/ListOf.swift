@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ListOf: View {
+    @Environment(Router.self) private var router
+    
     var body: some View {
         List {
             
@@ -22,7 +24,7 @@ struct ListOf: View {
                     ForEach(type.listOfRegisters) { item in
                         if item.subtitle == nil {
                             Button {
-                                // Navegar para a lista completa de registros
+                                router.selectedTab = .diario
                             } label: {
                                 rowContent(item)
                             }
