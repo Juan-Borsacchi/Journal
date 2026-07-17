@@ -37,6 +37,7 @@ struct ListOf: View {
                     }
                 }
             }
+            .rowBackground()
         }
         .navigationTitle("Seus Registros")
         .appBackground()

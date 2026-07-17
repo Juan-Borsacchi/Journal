@@ -50,6 +50,7 @@ struct NewRegisterView: View {
                     dismiss()
                 }
                 .disabled(title.isEmpty && body_.isEmpty)
+                .tint(.action)
             }
         }
         .appBackground()

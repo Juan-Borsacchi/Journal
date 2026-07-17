@@ -8,7 +8,16 @@
 import SwiftUI
 
 extension Color {
-    static let appBackground = Color.cardBackground
+    static let appBackground = Color.backGround
+    static let appRow = Color.cardBackground
+    static let appAccent = Color.action
+}
+
+struct AppRowBackGround: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .listRowBackground(Color.appRow)
+    }
 }
 
 struct AppBackGround: ViewModifier {
@@ -22,5 +31,9 @@ struct AppBackGround: ViewModifier {
 extension View {
     func appBackground() -> some View {
         modifier(AppBackGround())
+    }
+    
+    func rowBackground() -> some View {
+        modifier(AppRowBackGround())
     }
 }
