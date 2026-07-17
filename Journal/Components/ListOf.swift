@@ -8,34 +8,54 @@
 import SwiftUI
 
 struct ListOf: View {
-    @State private var singleSelection: UUID?
-    
     var body: some View {
-        NavigationView {
-            List(selection: $singleSelection) {
-                
-                Text("Aqui vai o Dashboard")
-                
-                ForEach(registerTypes) { type in
-                    Section(header: Text("\(type.type)").font(.title3).fontWeight(.bold).foregroundStyle(.primary)){
-                        ForEach(type.listOfRegisters) { item in
-                            VStack(alignment: .leading) {
-                                Text(item.title)
-                                    .font(item.subtitle == nil ? .body : .headline)
-                                Text(item.subtitle ?? "")
-                                    .font(.subheadline)
+        List {
+            
+            Text("Aqui vai o Dashboard")
+            
+            ForEach(registerTypes) { type in
+                Section(header: Text(type.type)
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.primary)
+                ){
+                    ForEach(type.listOfRegisters) { item in
+                        if item.subtitle == nil {
+                            Button {
+                                // Navegar para a lista completa de registros
+                            } label: {
+                                rowContent(item)
                             }
-                            .badge(item.lock == true ? "\(Image(systemName: "lock"))" : "")
-                            .badge(item.subtitle == nil ? "\(Image(systemName: "chevron.right"))" : "")
+                            .buttonStyle(.plain)
+                        } else {
+                            NavigationLink(value: Route.detail(id: item.id)) {
+                                rowContent(item)
+                            }
                         }
                     }
                 }
             }
-            .navigationTitle("Seus Registros")
         }
+        .navigationTitle("Seus Registros")
     }
+    
+    @ViewBuilder
+    private func rowContent(_ item: Register) -> some View {
+        VStack(alignment: .leading) {
+            Text(item.title)
+                .font(item.subtitle == nil ? .body : .headline)
+            if let subtitle = item.subtitle {
+                Text(subtitle)
+                    .font(.subheadline)
+            }
+        }
+        .badge(item.lock == true ? "\(Image(systemName: "lock"))" : "")
+        .badge(item.subtitle == nil ? "\(Image(systemName: "chevron.right"))" : "")    }
 }
 
 #Preview {
-    ListOf()
+    NavigationStack {
+        ListOf()
+    }
+    .environment(Router())
 }
