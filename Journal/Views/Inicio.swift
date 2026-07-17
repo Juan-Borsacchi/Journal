@@ -15,4 +15,5 @@ struct InicioView: View {
 
 #Preview {
     InicioView()
+        .environment(Router())
 }

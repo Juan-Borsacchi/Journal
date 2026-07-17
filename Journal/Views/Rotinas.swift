@@ -9,7 +9,11 @@ import SwiftUI
 
 struct RotinasView: View {
     var body: some View {
-        Text("Rotinas")
+        VStack {
+            Text("Rotinas")
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .appBackground()
     }
 }
 

@@ -52,6 +52,7 @@ struct NewRegisterView: View {
                 .disabled(title.isEmpty && body_.isEmpty)
             }
         }
+        .appBackground()
     }
 }
 

@@ -18,6 +18,8 @@ struct RotinaDetailView: View {
                 .foregroundStyle(.secondary)
         }
         .navigationTitle("Entrada \(id)")
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .appBackground()
     }
 }
 

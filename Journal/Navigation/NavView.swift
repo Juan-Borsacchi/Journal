@@ -43,7 +43,8 @@ struct NavView: View {
 
             Tab(value: AppTab.search, role: .search) {
                 NavigationStack {
-                    EmptyView()
+                    ContentUnavailableView("Buscar", systemImage: "magnifyingglass", description: Text("O que você procura?"))
+                        .appBackground()
                         .searchable(text: $query)
                 }
             }
@@ -71,6 +72,7 @@ struct NavView: View {
         }
     }
 }
+
 
 #Preview {
     NavView()

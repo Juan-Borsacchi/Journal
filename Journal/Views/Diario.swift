@@ -9,7 +9,11 @@ import SwiftUI
 
 struct DiarioView: View {
     var body: some View {
-        Text("Diario")
+        VStack{
+            Text("Diario")
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .appBackground()
     }
 }
 
