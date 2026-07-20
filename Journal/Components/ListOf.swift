@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ListOf: View {
     @Environment(Router.self) private var router
+    @Environment(\.editMode) private var editMode
     
     var body: some View {
         List {
@@ -47,17 +48,21 @@ struct ListOf: View {
         }
         .navigationTitle("Seus Registros")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar{
+            ToolbarItem(placement: .secondaryAction){
+                Text("Editar")
+            }
+            ToolbarItem(placement: .primaryAction){
+                Button{
+                    router.showNewEntry = true
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                }
+            }
+        }
         
         .appBackground()
         
-        .toolbar{
-            ToolbarItem(placement: .principal) {
-                Text("Seus Registros")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.primary)
-            }
-        }
     }
     
     @ViewBuilder

@@ -15,10 +15,6 @@ struct NavView: View {
         @Bindable var router = router
 
         TabView(selection: $router.selectedTab) {
-
-            Tab("Novo", systemImage: "square.and.pencil", value: AppTab.newEntry) {
-                EmptyView()
-            }
             
             Tab(value: AppTab.inicio) {
                 NavigationStack(path: $router.inicioPath) {
