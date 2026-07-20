@@ -42,7 +42,7 @@ struct Carousel: View {
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .background(.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .padding()
+        //.padding()
         .onAppear {
             gerarUltimosDezDias()
         }
