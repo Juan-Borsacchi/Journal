@@ -7,18 +7,6 @@
 
 import SwiftUI
 
-struct DiaHistorico: Identifiable {
-    let id = UUID()
-    let data: Date
-    var estaPreenchido: Bool = false
-    
-    var numeroDia: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d"
-        return formatter.string(from: data)
-    }
-}
-
 struct Carousel: View {
     
     @State private var days = 10
@@ -133,26 +121,28 @@ struct Carousel: View {
         
         self.listaDias.append(contentsOf: temporario)
     }
-}
-
-struct ZCoreGlassView: View {
-    let estaPreenchido: Bool
     
-    var body: some View {
-        ZStack {
-            Color.clear
-                .background(.ultraThinMaterial)
-            let corBase = estaPreenchido ? Color.action : Color.toDo
-            corBase.opacity(estaPreenchido ? 1 : 0.9)
-            
-            LinearGradient(
-                colors: [.white.opacity(0.25), .white.opacity(0.0)],
-                startPoint: .topLeading,
-                endPoint: .center
-            )
+    private struct ZCoreGlassView: View {
+        let estaPreenchido: Bool
+        
+        var body: some View {
+            ZStack {
+                Color.clear
+                    .background(.ultraThinMaterial)
+                let corBase = estaPreenchido ? Color.action : Color.toDo
+                corBase.opacity(estaPreenchido ? 1 : 0.9)
+                
+                LinearGradient(
+                    colors: [.white.opacity(0.25), .white.opacity(0.0)],
+                    startPoint: .topLeading,
+                    endPoint: .center
+                )
+            }
         }
     }
+    
 }
+
 
 #Preview {
     Carousel()
