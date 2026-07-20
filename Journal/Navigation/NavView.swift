@@ -16,29 +16,35 @@ struct NavView: View {
 
         TabView(selection: $router.selectedTab) {
 
-            Tab("Novo", systemImage: "plus.circle.fill", value: AppTab.newEntry) {
+            Tab("Novo", systemImage: "square.and.pencil", value: AppTab.newEntry) {
                 EmptyView()
             }
             
-            Tab("Inicio", systemImage: "house.fill", value: AppTab.inicio) {
+            Tab(value: AppTab.inicio) {
                 NavigationStack(path: $router.inicioPath) {
                     InicioView()
                         .navigationDestination(for: Route.self, destination: destination)
                 }
+            } label: {
+                tablabel("Início", "house", for: .inicio)
             }
-
-            Tab("Diario", systemImage: "person.fill", value: AppTab.diario) {
+            
+            Tab(value: AppTab.diario) {
                 NavigationStack(path: $router.diarioPath) {
                     DiarioView()
                         .navigationDestination(for: Route.self, destination: destination)
                 }
+            } label: {
+                tablabel("Diário", "book.pages", for: .diario)
             }
-
-            Tab("Rotinas", systemImage: "cloud.fill", value: AppTab.rotinas) {
-                NavigationStack(path: $router.rotinasPath) {
+            
+            Tab(value: AppTab.rotinas) {
+                NavigationStack(path: $router.diarioPath) {
                     RotinasView()
                         .navigationDestination(for: Route.self, destination: destination)
                 }
+            } label: {
+                tablabel("Rotinas", "square.stack.3d.up", for: .rotinas)
             }
 
             Tab(value: AppTab.search, role: .search) {
@@ -60,6 +66,11 @@ struct NavView: View {
                 NewRegisterView()
             }
         }
+    }
+    
+    private func tablabel(_ title: String, _ symbol: String, for tab: AppTab) -> some View {
+        Label(title, systemImage: symbol)
+            .environment(\.symbolVariants, router.selectedTab == tab ? .fill : .none)
     }
 
     @ViewBuilder
