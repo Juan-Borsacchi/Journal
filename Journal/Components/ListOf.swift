@@ -13,7 +13,13 @@ struct ListOf: View {
     var body: some View {
         List {
             
-            Text("Aqui vai o Dashboard")
+            Section(header: Text("Sequência de Registros")
+                .font(.title3)
+                .fontWeight(.bold)
+                .foregroundStyle(.primary)) {
+                    Carousel()
+                        .listRowInsets(EdgeInsets())
+                }
             
             ForEach(registerTypes) { type in
                 Section(header: Text(type.type)
@@ -40,7 +46,18 @@ struct ListOf: View {
             .rowBackground()
         }
         .navigationTitle("Seus Registros")
+        .navigationBarTitleDisplayMode(.inline)
+        
         .appBackground()
+        
+        .toolbar{
+            ToolbarItem(placement: .principal) {
+                Text("Seus Registros")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.primary)
+            }
+        }
     }
     
     @ViewBuilder
