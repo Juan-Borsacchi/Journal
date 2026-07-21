@@ -33,12 +33,12 @@ struct ListOf: View {
                             Button {
                                 router.selectedTab = .diario
                             } label: {
-                                rowContent(item)
+                                RowContent(item: item)
                             }
                             .buttonStyle(.plain)
                         } else {
                             NavigationLink(value: Route.detail(id: item.id)) {
-                                rowContent(item)
+                                RowContent(item: item)
                             }
                         }
                     }
@@ -64,19 +64,6 @@ struct ListOf: View {
         .appBackground()
         
     }
-    
-    @ViewBuilder
-    private func rowContent(_ item: Register) -> some View {
-        VStack(alignment: .leading) {
-            Text(item.title)
-                .font(item.subtitle == nil ? .body : .headline)
-            if let subtitle = item.subtitle {
-                Text(subtitle)
-                    .font(.subheadline)
-            }
-        }
-        .badge(item.lock == true ? "\(Image(systemName: "lock"))" : "")
-        .badge(item.subtitle == nil ? "\(Image(systemName: "chevron.right"))" : "")    }
 }
 
 #Preview {

@@ -13,6 +13,7 @@ struct Register: Hashable, Identifiable {
     let title: String
     var subtitle: String? = nil
     var lock: Bool? = false
+    var favorite: Bool? = false
 }
 
 struct RegisterType: Identifiable {
@@ -24,7 +25,7 @@ struct RegisterType: Identifiable {
 let registerTypes: [RegisterType] = [
     RegisterType(type: "Registros", listOfRegisters: [
         Register(title: "Dia 25 de junho", subtitle: "Hoje eu comi...", lock: true),
-        Register(title: "Dia 24 de junho", subtitle: "Hoje eu bebi..."),
+        Register(title: "Dia 24 de junho", subtitle: "Hoje eu bebi...", favorite: true),
         Register(title: "Ver todos")
     ]),
     RegisterType(type: "Rotinas", listOfRegisters: [
@@ -32,7 +33,7 @@ let registerTypes: [RegisterType] = [
         Register(title: "Ver todos")
     ]),
     RegisterType(type: "Compartilhadas", listOfRegisters: [
-        Register(title: "Dia 23 de junho", subtitle: "Hoje fizemos...", lock: true),
+        Register(title: "Dia 23 de junho", subtitle: "Hoje fizemos...", lock: true, favorite: true),
         Register(title: "Ver todos")
     ]),
 ]

@@ -8,11 +8,37 @@
 import SwiftUI
 
 struct DiarioView: View {
+    
+    @State private var viewModel = DiaryViewModel()
+    
     var body: some View {
-        VStack{
-            Text("Diario")
+        
+        VStack {
+            VStack{
+                DiaryHeader(
+                    ordenacaoAtual: $viewModel.ordenacaoAtual
+                )
+                
+                DiaryPicker(
+                    tab: $viewModel.tab
+                )
+            }
+            .padding(.bottom)
+            List {
+                Section {
+                    ForEach(viewModel.diaryFilter) { item in
+                        NavigationLink(value: Route.detail(id: item.id)) {
+                            RowContent(item: item)
+                        }
+                    }
+                }
+            }
+            .rowBackground()
+            .listStyle(.plain)
+            .headerProminence(.increased)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
         .appBackground()
     }
 }
