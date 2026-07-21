@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Carousel: View {
-    
     @State private var days = 10
     @State private var listaDias: [DiaHistorico] = []
     
@@ -29,13 +28,23 @@ struct Carousel: View {
             .padding(8)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .bottom,spacing: 16) {
-                    ForEach(listaDias.indices, id: \.self) { index in
-                        desenharDiaItem(index: index)
+                ScrollViewReader { proxy in
+                    HStack(alignment: .bottom, spacing: 16) {
+                        ForEach(listaDias.indices, id: \.self) { index in
+                            desenharDiaItem(index: index)
+                                .id(index)
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
+                    .onAppear {
+                        DispatchQueue.main.async {
+                            if let indexHoje = listaDias.firstIndex(where: { Calendar.current.isDateInToday($0.data) }) {
+                                proxy.scrollTo(indexHoje, anchor: .center)
+                            }
+                        }
                     }
                 }
-                .padding(.horizontal)
-                .padding(.vertical, 8)
             }
             .padding(.vertical,8)
         }
@@ -59,7 +68,7 @@ struct Carousel: View {
                     let tempo = timeline.date.timeIntervalSinceReferenceDate
                     
                     let offsetSincronizado = sin(tempo * 2) * 4 - 4
-                    Image("book.closed.fire")
+                    Image(systemName: "book.closed.fill")
                         .renderingMode(.original)
                         .font(eHoje ? .system(size: 45) : .title)
                         .offset(y: offsetSincronizado)
