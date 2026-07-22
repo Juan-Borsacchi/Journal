@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
-import Combine
 
-final class DiaryViewModel: ObservableObject {
+@Observable
+final class DiaryViewModel {
 
-    @Published var tab: TypeDiary = .diary
-    @Published var ordenacaoAtual = "Padrão (Data de Edição)"
+    var tab: TypeDiary = .diary
+    var ordenacaoAtual = "Padrão (Data de Edição)"
+    var agrupacaoAtual = "Padrão (Ativado)"
 
     var diaryFilter: [Register] {
 

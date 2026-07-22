@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum TypeDiary {
+enum TypeDiary: Hashable, CaseIterable {
     case diary
     case shared
     case favorites
