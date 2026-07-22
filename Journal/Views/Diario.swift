@@ -35,16 +35,16 @@ struct DiarioView: View {
         .navigationTitle("Diário")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
-            ToolbarItem(placement: .secondaryAction){
-                DiaryMenu(ordenacaoAtual: $viewModel.ordenacaoAtual, agrupacaoAtual: $viewModel.agrupacaoAtual)
-            }
             
-            ToolbarItem(placement: .primaryAction){
+            ToolbarItem(placement: .topBarTrailing){
                 Button{
                     router.showNewEntry = true
                 } label: {
                     Image(systemName: "square.and.pencil")
                 }
+            }
+            ToolbarItem(placement: .topBarTrailing){
+                DiaryMenu(ordenacaoAtual: $viewModel.ordenacaoAtual, agrupacaoAtual: $viewModel.agrupacaoAtual)
             }
             
         }
