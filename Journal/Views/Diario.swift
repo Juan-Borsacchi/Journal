@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DiarioView: View {
-    
+    @Environment(Router.self) private var router
     @State private var viewModel = DiaryViewModel()
     
     var body: some View {
@@ -35,8 +35,16 @@ struct DiarioView: View {
         .navigationTitle("Seu Diário")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
-            ToolbarItem(placement: .primaryAction){
+            ToolbarItem{
                 DiaryMenu(ordenacaoAtual: $viewModel.ordenacaoAtual)
+            }
+            
+            ToolbarItem(placement: .primaryAction){
+                Button{
+                    router.showNewEntry = true
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                }
             }
         }
         .appBackground()
