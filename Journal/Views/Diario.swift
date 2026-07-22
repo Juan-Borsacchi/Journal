@@ -31,6 +31,7 @@ struct DiarioView: View {
                 }
                 .rowBackground()
             }
+            .animation(.snappy, value: viewModel.tab)
         }
         .navigationTitle("Diário")
         .navigationBarTitleDisplayMode(.inline)
