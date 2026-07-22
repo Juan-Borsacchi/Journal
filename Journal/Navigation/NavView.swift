@@ -62,6 +62,7 @@ struct NavView: View {
                 NewRegisterView()
             }
         }
+        .tint(.black)
     }
     
     private func tablabel(_ title: String, _ symbol: String, for tab: AppTab) -> some View {

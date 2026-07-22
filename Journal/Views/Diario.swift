@@ -8,22 +8,19 @@
 import SwiftUI
 
 struct DiarioView: View {
-    
+    @Environment(Router.self) private var router
     @State private var viewModel = DiaryViewModel()
     
     var body: some View {
         
         VStack {
-            VStack{
-                DiaryHeader(
-                    ordenacaoAtual: $viewModel.ordenacaoAtual
-                )
-                
-                DiaryPicker(
-                    tab: $viewModel.tab
-                )
-            }
-            .padding(.bottom)
+
+            DiaryPicker(
+                tab: $viewModel.tab
+            )
+            .padding(.top, 10)
+            .padding(.horizontal)
+            
             List {
                 Section {
                     ForEach(viewModel.diaryFilter) { item in
@@ -32,17 +29,29 @@ struct DiarioView: View {
                         }
                     }
                 }
+                .rowBackground()
             }
-            .rowBackground()
-            .listStyle(.plain)
-            .headerProminence(.increased)
-            .clipShape(RoundedRectangle(cornerRadius: 15))
         }
-        .padding()
+        .navigationTitle("Diário")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar{
+            ToolbarItem{
+                DiaryMenu(ordenacaoAtual: $viewModel.ordenacaoAtual)
+            }
+            
+            ToolbarItem(placement: .primaryAction){
+                Button{
+                    router.showNewEntry = true
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                }
+            }
+        }
         .appBackground()
     }
 }
 
 #Preview {
     DiarioView()
+        .environment(Router())
 }

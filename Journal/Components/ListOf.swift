@@ -17,7 +17,7 @@ struct ListOf: View {
             Section(header: Text("Sequência de Registros")
                 .font(.title3)
                 .fontWeight(.bold)
-                .foregroundStyle(.primary)) {
+                .foregroundStyle(Color.primary)) {
                     Carousel()
                         .listRowInsets(EdgeInsets())
                 }
@@ -26,7 +26,7 @@ struct ListOf: View {
                 Section(header: Text(type.type)
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(Color.primary)
                 ){
                     ForEach(type.listOfRegisters) { item in
                         if item.subtitle == nil {

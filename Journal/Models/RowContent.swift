@@ -13,12 +13,15 @@ struct RowContent: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(item.title)
-                .font(item.subtitle == nil ? .body : .headline)
+                .font(item.subtitle == nil ? .body : .subheadline)
+                .fontWeight(item.subtitle == nil ? .regular : .bold)
             if let subtitle = item.subtitle {
                 Text(subtitle)
                     .font(.subheadline)
+                    .opacity(0.5)
             }
         }
         .badge(item.lock == true ? "\(Image(systemName: "lock"))" : "")
-        .badge(item.subtitle == nil ? "\(Image(systemName: "chevron.right"))" : "")    }
+        .badge(item.subtitle == nil ? "\(Image(systemName: "chevron.right"))" : "")
+    }
 }
