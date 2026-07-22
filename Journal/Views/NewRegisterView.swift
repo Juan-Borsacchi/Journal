@@ -16,9 +16,9 @@ struct NewRegisterView: View {
     var body: some View {
         ScrollView {
             VStack (alignment: .leading, spacing: 8) {
-                TextField("Título", text: $title)
-                    .font(.title.bold())
-                    .textInputAutocapitalization(.sentences)
+//                TextField("Título", text: $title)
+//                    .font(.title.bold())
+//                    .textInputAutocapitalization(.sentences)
                 
                 TextEditor(text: $body_)
                     .font(.body)
@@ -41,6 +41,18 @@ struct NewRegisterView: View {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancelar", systemImage: "chevron.left") {
                     dismiss()
+                }
+            }
+            
+            ToolbarItem{
+                Button("Compartilhar", systemImage: "square.and.arrow.up") {
+                    
+                }
+            }
+
+            ToolbarItem{
+                Button("...", systemImage: "ellipsis") {
+                    
                 }
             }
             
