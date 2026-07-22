@@ -68,7 +68,7 @@ struct Carousel: View {
                     let tempo = timeline.date.timeIntervalSinceReferenceDate
                     
                     let offsetSincronizado = sin(tempo * 2) * 4 - 4
-                    Image(systemName: "book.closed.fill")
+                    Image("book.closed.fire")
                         .renderingMode(.original)
                         .font(eHoje ? .system(size: 45) : .title)
                         .offset(y: offsetSincronizado)
@@ -124,7 +124,12 @@ struct Carousel: View {
         
         for i in -alcance...alcance {
             if let data = calendario.date(byAdding: .day, value: i, to: hoje) {
-                temporario.append(DiaHistorico(data: data))
+                var novoDia = DiaHistorico(data: data)
+                
+                if i < 0{
+                    novoDia.estaPreenchido = true
+                }
+                temporario.append(novoDia)
             }
         }
         

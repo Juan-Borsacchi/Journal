@@ -11,6 +11,7 @@ struct DiaryMenu: View {
     
     @Environment(\.colorScheme) private var colorScheme
     @Binding var ordenacaoAtual: String
+    @Binding var agrupacaoAtual: String
     
     var body: some View {
         Menu {
@@ -65,32 +66,30 @@ struct DiaryMenu: View {
                 Image(systemName: "arrow.up.arrow.down")
             }
             
-            Button(role: .destructive, action: {
-                print("Apagar pressionado")
-            }) {
-                Label("Excluir", systemImage: "trash")
+            Menu {
+                Button(action: { agrupacaoAtual = "Padrão (Ativado)" }) {
+                    HStack {
+                        Text("Padrão (Ativado)")
+                    }
+                }
+                Button(action: { agrupacaoAtual = "Ativado" }) {
+                    HStack {
+                        Text("Ativado")
+                    }
+                }
+                Button(action: { agrupacaoAtual = "Desativado" }) {
+                    HStack {
+                        Text("Desativado")
+                    }
+                }
+            } label: {
+                Text("Agrupar por Data")
+                Text(agrupacaoAtual)
+                Image(systemName: "calendar")
             }
-        } label: {
+        }
+        label: {
             Image(systemName: "ellipsis")
-                .font(.system(size: 18, weight: .bold))
-                .foregroundStyle(Color(.icons))
-                .frame(width: 44, height: 44)
-                .background(
-                    Circle()
-                        .fill(colorScheme == .light ? Color.white.opacity(0.6) : Color(.systemGray6).opacity(0.5))
-                        .overlay(
-                            Circle()
-                                .stroke(colorScheme == .light ? Color.white.opacity(0.4) : Color.white.opacity(0.15), lineWidth: 1)
-                        )
-                )
-                .shadow(
-                    color: colorScheme == .light ? Color.black.opacity(0.08) : Color.black.opacity(0.4),
-                    radius: 6, x: 3, y: 4
-                )
-                .shadow(
-                    color: colorScheme == .light ? Color.white.opacity(0.5) : Color.white.opacity(0.05),
-                    radius: 4, x: -2, y: -2
-                )
         }
     }
 }
