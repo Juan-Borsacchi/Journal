@@ -19,7 +19,7 @@ struct NewRegisterView: View {
 //                TextField("Título", text: $title)
 //                    .font(.title.bold())
 //                    .textInputAutocapitalization(.sentences)
-                
+                Divider()
                 TextEditor(text: $body_)
                     .font(.body)
                     .frame(minHeight: 300)
