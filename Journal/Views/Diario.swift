@@ -32,7 +32,7 @@ struct DiarioView: View {
                 .rowBackground()
             }
         }
-        .navigationTitle("Seu Diário")
+        .navigationTitle("Diário")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
             ToolbarItem{
