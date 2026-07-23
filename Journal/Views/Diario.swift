@@ -31,7 +31,7 @@ struct DiarioView: View {
                 }
                 .rowBackground()
             }
-            .animation(.snappy, value: viewModel.tab)
+            .animation(.bouncy, value: viewModel.tab)
         }
         .navigationTitle("Diário")
         .navigationBarTitleDisplayMode(.inline)
@@ -50,6 +50,13 @@ struct DiarioView: View {
             
         }
         .appBackground()
+        .onChange(of: router.pendingDiaryCategory, initial: true) { _, category in
+            guard let category else { return }
+            withAnimation(.snappy) {
+                viewModel.tab = category
+            }
+            router.pendingDiaryCategory = nil
+        }
     }
 }
 

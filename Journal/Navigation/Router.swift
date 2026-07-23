@@ -26,6 +26,14 @@ final class Router {
     
     var showNewEntry: Bool = false
     
+    var pendingDiaryCategory: TypeDiary?
+    
+    func openDiary(_ category: TypeDiary) {
+        diarioPath.removeAll() // para sempre cair na raiz
+        pendingDiaryCategory = category
+        selectedTab = .diario
+    }
+    
     func popToRoot(_ tab: AppTab) {
         switch tab {
         case .inicio:
