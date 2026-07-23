@@ -35,7 +35,7 @@ struct NavView: View {
             }
             
             Tab(value: AppTab.rotinas) {
-                NavigationStack(path: $router.diarioPath) {
+                NavigationStack(path: $router.rotinasPath) {
                     RotinasView()
                         .navigationDestination(for: Route.self, destination: destination)
                 }
@@ -45,9 +45,8 @@ struct NavView: View {
 
             Tab(value: AppTab.search, role: .search) {
                 NavigationStack {
-                    ContentUnavailableView("Buscar", systemImage: "magnifyingglass", description: Text("O que você procura?"))
-                        .appBackground()
-                        .searchable(text: $query)
+                    SearchView()
+                        .navigationDestination(for: Route.self, destination: destination)
                 }
             }
         }

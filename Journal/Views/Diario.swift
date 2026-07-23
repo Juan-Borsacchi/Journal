@@ -31,15 +31,13 @@ struct DiarioView: View {
                 }
                 .rowBackground()
             }
+            .animation(.bouncy, value: viewModel.tab)
         }
         .navigationTitle("Diário")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
-            ToolbarItem(placement: .secondaryAction){
-                DiaryMenu(ordenacaoAtual: $viewModel.ordenacaoAtual, agrupacaoAtual: $viewModel.agrupacaoAtual)
-            }
             
-            ToolbarItem(placement: .primaryAction){
+            ToolbarItem(placement: .topBarTrailing){
                 Button{
                     router.selectedTab = .diario
                     router.diarioPath.append(.newEntry)
@@ -47,9 +45,19 @@ struct DiarioView: View {
                     Image(systemName: "square.and.pencil")
                 }
             }
+            ToolbarItem(placement: .topBarTrailing){
+                DiaryMenu(ordenacaoAtual: $viewModel.ordenacaoAtual, agrupacaoAtual: $viewModel.agrupacaoAtual)
+            }
             
         }
         .appBackground()
+        .onChange(of: router.pendingDiaryCategory, initial: true) { _, category in
+            guard let category else { return }
+            withAnimation(.snappy) {
+                viewModel.tab = category
+            }
+            router.pendingDiaryCategory = nil
+        }
     }
 }
 

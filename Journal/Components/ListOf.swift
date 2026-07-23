@@ -14,33 +14,15 @@ struct ListOf: View {
     var body: some View {
         List {
             
-            Section(header: Text("Sequência de Registros")
-                .font(.title3)
-                .fontWeight(.bold)
-                .foregroundStyle(Color.primary)) {
+            Section(header: sectionHeader("Sequência de registros")) {
                     Carousel()
                         .listRowInsets(EdgeInsets())
                 }
             
             ForEach(registerTypes) { type in
-                Section(header: Text(type.type)
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color.primary)
-                ){
+                Section(header: sectionHeader(type.type)){
                     ForEach(type.listOfRegisters) { item in
-                        if item.subtitle == nil {
-                            Button {
-                                router.selectedTab = .diario
-                            } label: {
-                                RowContent(item: item)
-                            }
-                            .buttonStyle(.plain)
-                        } else {
-                            NavigationLink(value: Route.detail(id: item.id)) {
-                                RowContent(item: item)
-                            }
-                        }
+                        RegisterRow(type: type, item: item)
                     }
                 }
             }
@@ -49,10 +31,7 @@ struct ListOf: View {
         .navigationTitle("Seus Registros")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
-            ToolbarItem(placement: .secondaryAction){
-                Text("Editar")
-            }
-            ToolbarItem(placement: .primaryAction){
+            ToolbarItem(placement: .topBarTrailing){
                 Button{
                     router.selectedTab = .inicio
                     router.inicioPath.append(.newEntry)
@@ -60,10 +39,20 @@ struct ListOf: View {
                     Image(systemName: "square.and.pencil")
                 }
             }
+            ToolbarItem(placement: .topBarTrailing){
+                Image(systemName: "ellipsis")
+            }
         }
         
         .appBackground()
         
+    }
+    
+    private func sectionHeader(_ text: String) -> some View {
+        Text(text)
+            .font(.title3)
+            .fontWeight(.bold)
+            .foregroundColor(Color.primary)
     }
 }
 
