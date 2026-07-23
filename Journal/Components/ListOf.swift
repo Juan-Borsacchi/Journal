@@ -54,7 +54,8 @@ struct ListOf: View {
             }
             ToolbarItem(placement: .primaryAction){
                 Button{
-                    router.showNewEntry = true
+                    router.selectedTab = .inicio
+                    router.inicioPath.append(.newEntry)
                 } label: {
                     Image(systemName: "square.and.pencil")
                 }

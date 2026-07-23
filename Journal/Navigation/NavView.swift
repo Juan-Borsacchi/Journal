@@ -51,7 +51,7 @@ struct NavView: View {
                 }
             }
         }
-        .onChange(of: router.selectedTab) { oldTab, newTab in
+        /*.onChange(of: router.selectedTab) { oldTab, newTab in
             if newTab == .newEntry {
                 router.selectedTab = oldTab
                 router.showNewEntry = true
@@ -61,7 +61,7 @@ struct NavView: View {
             NavigationStack {
                 NewRegisterView()
             }
-        }
+        }*/
         .tint(.black)
     }
     
