@@ -14,7 +14,6 @@ struct NewRegisterView: View {
     @State private var body_: String = ""
     
     var body: some View {
-        ScrollView {
             VStack (alignment: .leading, spacing: 8) {
 //                TextField("Título", text: $title)
 //                    .font(.title.bold())
@@ -34,15 +33,34 @@ struct NewRegisterView: View {
                     }
             }
             .padding()
-        }
         .navigationTitle("Novo Registro")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .tabBar)
         .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
+            ToolbarItemGroup(placement: .keyboard) {
+                Button {
+                } label: {
+                    Image(systemName: "bold")
+                }
+                
+                Button {
+                } label: {
+                    Image(systemName: "italic")
+                }
+                
+                Button {
+                } label: {
+                    Image(systemName: "underline")
+                }
+                Spacer()
+            }
+            
+            
+            /*ToolbarItem(placement: .cancellationAction) {
                 Button("Cancelar", systemImage: "chevron.left") {
                     dismiss()
                 }
-            }
+            }*/
             
             ToolbarItem{
                 Button("Compartilhar", systemImage: "square.and.arrow.up") {

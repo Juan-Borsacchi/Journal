@@ -41,7 +41,8 @@ struct DiarioView: View {
             
             ToolbarItem(placement: .primaryAction){
                 Button{
-                    router.showNewEntry = true
+                    router.selectedTab = .diario
+                    router.diarioPath.append(.newEntry)
                 } label: {
                     Image(systemName: "square.and.pencil")
                 }
