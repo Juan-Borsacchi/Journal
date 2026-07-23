@@ -23,18 +23,6 @@ struct ListOf: View {
                 Section(header: sectionHeader(type.type)){
                     ForEach(type.listOfRegisters) { item in
                         RegisterRow(type: type, item: item)
-//                        if item.subtitle == nil {
-//                            Button {
-//                                router.selectedTab = .diario
-//                            } label: {
-//                                RowContent(item: item)
-//                            }
-//                            .buttonStyle(.plain)
-//                        } else {
-//                            NavigationLink(value: Route.detail(id: item.id)) {
-//                                RowContent(item: item)
-//                            }
-//                        }
                     }
                 }
             }
