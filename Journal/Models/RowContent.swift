@@ -23,5 +23,20 @@ struct RowContent: View {
         }
         .badge(item.lock == true ? "\(Image(systemName: "lock"))" : "")
         .badge(item.subtitle == nil ? "\(Image(systemName: "chevron.right"))" : "")
+        .contextMenu {
+            
+            Button("Favoritar", systemImage: "star") {}
+            Button("Compartilhar", systemImage: "square.and.arrow.up") {}
+            Button(role: .destructive) {} label: { Label("Excluir", systemImage: "trash") }
+            
+            Divider()
+            
+            Button("Mover para Rotina", systemImage: "folder") {}
+                Button("Bloquear Registro", systemImage: "lock") {}
+                Button("Copiar Registro", systemImage: "doc.on.doc") {}
+            } preview: {
+                RegisterPreview(item: item)
+            }
+        
     }
 }
