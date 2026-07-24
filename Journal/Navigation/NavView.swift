@@ -50,17 +50,6 @@ struct NavView: View {
                 }
             }
         }
-        /*.onChange(of: router.selectedTab) { oldTab, newTab in
-            if newTab == .newEntry {
-                router.selectedTab = oldTab
-                router.showNewEntry = true
-            }
-        }
-        .fullScreenCover(isPresented: $router.showNewEntry) {
-            NavigationStack {
-                NewRegisterView()
-            }
-        }*/
         .tint(.black)
     }
     
@@ -73,7 +62,7 @@ struct NavView: View {
     private func destination(for route: Route) -> some View {
         switch route {
         case .detail(let id):
-            RotinaDetailView(id: id)
+            NewRegisterView(id: id)
         case .newEntry:
             NewRegisterView()
         }
