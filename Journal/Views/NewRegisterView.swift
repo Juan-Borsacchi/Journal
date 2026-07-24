@@ -12,6 +12,7 @@ struct NewRegisterView: View {
     
     @State private var title: String = ""
     @State private var body_: String = ""
+    @State private var showAttachments: Bool = false
     
     var body: some View {
             VStack (alignment: .leading, spacing: 8) {
@@ -38,19 +39,60 @@ struct NewRegisterView: View {
         .toolbar(.hidden, for: .tabBar)
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
-                Button {
+                Menu {
+                    Section("Estilo") {
+                        Button("Título") { }
+                        Button("Cabeçalho") { }
+                        Button("Corpo") { }
+                    }
+
+                    Divider()
+
+                    Section("Formatação") {
+                        Button("Negrito", systemImage: "bold") { }
+                        Button("Itálico", systemImage: "italic") { }
+                        Button("Sublinhado", systemImage: "underline") { }
+                        Button("Tachado", systemImage: "strikethrough") { }
+                    }
+
+                    Divider()
+
+                    Section("Alinhamento") {
+                        Button("Esquerda") { }
+                        Button("Centralizado") { }
+                        Button("Direita") { }
+                    }
                 } label: {
-                    Image(systemName: "bold")
+                    Text("Aa")
                 }
                 
                 Button {
+                    showAttachments = true
                 } label: {
-                    Image(systemName: "italic")
+                    Image(systemName: "paperclip")
+                }
+                .confirmationDialog("Adicionar", isPresented: $showAttachments) {
+                    Button("Foto") { }
+                    Button("Documento") { }
+                    Button("Link") { }
+                    Button("Escanear Documento") { }
                 }
                 
                 Button {
+                    
                 } label: {
-                    Image(systemName: "underline")
+                    Image(systemName: "checklist")
+                }
+                
+                Menu {
+                    Button("Lista com marcadores", systemImage: "list.triangle") {}
+
+                    Button("Lista numerada", systemImage: "list.number") {}
+
+                    Button("Lista tracejada", systemImage: "list.dash") {}
+                    
+                } label: {
+                    Image(systemName: "list.bullet")
                 }
                 Spacer()
             }
