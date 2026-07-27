@@ -117,7 +117,6 @@ struct DiaryMenu: View {
                 Label("Selecionar Registros", systemImage: "checkmark.circle")
             }
 
-            // ORDENAR POR — Picker com Sections = check automático + divisória
             Menu {
                 Picker("Ordenar por", selection: $ordenacaoAtual) {
                     Section {
@@ -137,7 +136,6 @@ struct DiaryMenu: View {
                 Image(systemName: "arrow.up.arrow.down")
             }
 
-            // AGRUPAR POR DATA
             Menu {
                 Picker("Agrupar por Data", selection: $agrupacaoAtual) {
                     Text("Padrão (Ativado)").tag("Padrão (Ativado)")
