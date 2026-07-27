@@ -8,21 +8,30 @@
 import SwiftUI
 
 struct NewRegisterView: View {
+    let id: UUID?
+    
     @Environment(\.dismiss) private var dismiss
     
     @State private var title: String = ""
     @State private var body_: String = ""
     @State private var showAttachments: Bool = false
     
+    init(id: UUID? = nil) {
+        self.id = id
+    }
+    
+    private var isEditing: Bool {
+        id != nil
+    }
+    
     var body: some View {
             VStack (alignment: .leading, spacing: 8) {
-//                TextField("Título", text: $title)
-//                    .font(.title.bold())
-//                    .textInputAutocapitalization(.sentences)
+
                 Divider()
+                
                 TextEditor(text: $body_)
                     .font(.body)
-                    .frame(minHeight: 300)
+                    .frame(maxHeight: .infinity)
                     .scrollContentBackground(.hidden)
                     .overlay(alignment: .topLeading) {
                         if body_.isEmpty {
@@ -114,18 +123,40 @@ struct NewRegisterView: View {
                 Button("...", systemImage: "ellipsis") {
                     
                 }
-            }
-            
-            ToolbarItem(placement: .confirmationAction) {
-                Button("Salvar", systemImage: "checkmark") {
-                    // A FAZER: Salvar a nota
-                    dismiss()
+                
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Salvar", systemImage: "checkmark") {
+                        // A FAZER: Salvar a nota
+                        dismiss()
+                    }
+                    .disabled(title.isEmpty && body_.isEmpty)
+                    .tint(.action)
                 }
-                .disabled(title.isEmpty && body_.isEmpty)
-                .tint(.action)
             }
+            .onAppear(perform: load)
+            .appBackground()
+    }
+    
+    private var navTitle: String {
+        if isEditing {
+            return title.isEmpty ? "Registro" : title
+        } else {
+            return "Novo registro"
         }
-        .appBackground()
+    }
+    
+    private func load() {
+        guard let id, let register = Register.find(by: id) else { return }
+        title = register.title
+        body_ = register.subtitle ?? ""
+    }
+}
+
+extension Register {
+    static func find(by id: UUID) -> Register? {
+        registerTypes
+            .flatMap { $0.listOfRegisters }
+            .first { $0.id == id }
     }
 }
 
