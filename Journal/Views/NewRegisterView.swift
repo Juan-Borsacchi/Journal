@@ -25,24 +25,24 @@ struct NewRegisterView: View {
     }
     
     var body: some View {
-            VStack (alignment: .leading, spacing: 8) {
-
-                Divider()
-                
-                TextEditor(text: $body_)
-                    .font(.body)
-                    .frame(maxHeight: .infinity)
-                    .scrollContentBackground(.hidden)
-                    .overlay(alignment: .topLeading) {
-                        if body_.isEmpty {
-                            Text("Como foi o seu dia?")
-                                .foregroundStyle(.secondary)
-                                .padding(.top, 8)
-                                .allowsHitTesting(false)
-                        }
+        VStack (alignment: .leading, spacing: 8) {
+            
+            Divider()
+            
+            TextEditor(text: $body_)
+                .font(.body)
+                .frame(maxHeight: .infinity)
+                .scrollContentBackground(.hidden)
+                .overlay(alignment: .topLeading) {
+                    if body_.isEmpty {
+                        Text("Como foi o seu dia?")
+                            .foregroundStyle(.secondary)
+                            .padding(.top, 8)
+                            .allowsHitTesting(false)
                     }
-            }
-            .padding()
+                }
+        }
+        .padding()
         .navigationTitle("Novo Registro")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)
@@ -54,18 +54,18 @@ struct NewRegisterView: View {
                         Button("Cabeçalho") { }
                         Button("Corpo") { }
                     }
-
+                    
                     Divider()
-
+                    
                     Section("Formatação") {
                         Button("Negrito", systemImage: "bold") { }
                         Button("Itálico", systemImage: "italic") { }
                         Button("Sublinhado", systemImage: "underline") { }
                         Button("Tachado", systemImage: "strikethrough") { }
                     }
-
+                    
                     Divider()
-
+                    
                     Section("Alinhamento") {
                         Button("Esquerda") { }
                         Button("Centralizado") { }
@@ -95,9 +95,9 @@ struct NewRegisterView: View {
                 
                 Menu {
                     Button("Lista com marcadores", systemImage: "list.triangle") {}
-
+                    
                     Button("Lista numerada", systemImage: "list.number") {}
-
+                    
                     Button("Lista tracejada", systemImage: "list.dash") {}
                     
                 } label: {
@@ -106,35 +106,29 @@ struct NewRegisterView: View {
                 Spacer()
             }
             
-            
-            /*ToolbarItem(placement: .cancellationAction) {
-                Button("Cancelar", systemImage: "chevron.left") {
-                    dismiss()
-                }
-            }*/
-            
             ToolbarItem{
                 Button("Compartilhar", systemImage: "square.and.arrow.up") {
                     
                 }
             }
-
+            
             ToolbarItem{
                 Button("...", systemImage: "ellipsis") {
                     
                 }
-                
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Salvar", systemImage: "checkmark") {
-                        // A FAZER: Salvar a nota
-                        dismiss()
-                    }
-                    .disabled(title.isEmpty && body_.isEmpty)
-                    .tint(.action)
-                }
             }
-            .onAppear(perform: load)
-            .appBackground()
+            
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Salvar", systemImage: "checkmark") {
+                    // A FAZER: Salvar a nota
+                    dismiss()
+                }
+                .disabled(title.isEmpty && body_.isEmpty)
+                .tint(.action)
+            }
+        }
+        .onAppear(perform: load)
+        .appBackground()
     }
     
     private var navTitle: String {
