@@ -19,6 +19,8 @@ struct RowContent: View {
                 Text(subtitle)
                     .font(.subheadline)
                     .opacity(0.5)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
             }
         }
         .badge(item.lock == true ? "\(Image(systemName: "lock"))" : "")
