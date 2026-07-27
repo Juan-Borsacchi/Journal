@@ -43,7 +43,7 @@ struct NewRegisterView: View {
                 }
         }
         .padding()
-        .navigationTitle("Novo Registro")
+        .navigationTitle(title.isEmpty ? "Novo Registro" : title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)
         .toolbar {
