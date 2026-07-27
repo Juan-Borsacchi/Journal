@@ -28,10 +28,12 @@ struct RegisterPreview: View {
                     Image(systemName: "lock.fill")
                 }
             }
+            .padding(.top)
+            Divider()
 
             if let subtitle = item.subtitle {
                 Text(subtitle)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.primary)
             }
                 
             Spacer(minLength: 0)
