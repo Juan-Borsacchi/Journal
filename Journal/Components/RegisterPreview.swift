@@ -15,9 +15,9 @@ struct RegisterPreview: View {
 
             HStack {
                 Text(item.title)
-                    .font(.headline)
+                    .font(.headline.bold())
 
-                //Spacer()
+                Spacer()
 
                 if item.favorite == true {
                     Image(systemName: "star.fill")
@@ -33,9 +33,10 @@ struct RegisterPreview: View {
                 Text(subtitle)
                     .foregroundStyle(.secondary)
             }
+                
+            Spacer(minLength: 0)
         }
         .padding()
-        //.frame(minWidth: .infinity, minHeight: 300)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(width: 350, height: 400, alignment: .topLeading)
     }
 }
