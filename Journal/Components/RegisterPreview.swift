@@ -17,7 +17,7 @@ struct RegisterPreview: View {
                 Text(item.title)
                     .font(.headline)
 
-                Spacer()
+                //Spacer()
 
                 if item.favorite == true {
                     Image(systemName: "star.fill")
@@ -35,6 +35,7 @@ struct RegisterPreview: View {
             }
         }
         .padding()
+        //.frame(minWidth: .infinity, minHeight: 300)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
