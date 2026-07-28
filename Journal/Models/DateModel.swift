@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct DiaHistorico: Identifiable {
+struct DayHistory: Identifiable {
     let id = UUID()
-    let data: Date
-    var estaPreenchido: Bool = false
+    let date: Date
+    var isFull: Bool = false
     
     var numeroDia: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "d"
-        return formatter.string(from: data)
+        return formatter.string(from: date)
     }
 }

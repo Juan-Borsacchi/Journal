@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Carousel: View {
     @State private var days = 10
-    @State private var listaDias: [DiaHistorico] = []
+    @State private var listOfDays: [DayHistory] = []
     
     var body: some View {
         VStack {
@@ -30,8 +30,8 @@ struct Carousel: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 ScrollViewReader { proxy in
                     HStack(alignment: .bottom, spacing: 16) {
-                        ForEach(listaDias.indices, id: \.self) { index in
-                            desenharDiaItem(index: index)
+                        ForEach(listOfDays.indices, id: \.self) { index in
+                            drawDayItem(index: index)
                                 .id(index)
                         }
                     }
@@ -39,8 +39,8 @@ struct Carousel: View {
                     .padding(.vertical, 8)
                     .onAppear {
                         DispatchQueue.main.async {
-                            if let indexHoje = listaDias.firstIndex(where: { Calendar.current.isDateInToday($0.data) }) {
-                                proxy.scrollTo(indexHoje, anchor: .center)
+                            if let todayIndex = listOfDays.firstIndex(where: { Calendar.current.isDateInToday($0.date) }) {
+                                proxy.scrollTo(todayIndex, anchor: .center)
                             }
                         }
                     }
@@ -53,34 +53,34 @@ struct Carousel: View {
         .clipShape(RoundedRectangle(cornerRadius: 16))
         //.padding()
         .onAppear {
-            gerarUltimosDezDias()
+            lastTenDaysGenerator()
         }
     }
     
     @ViewBuilder
-    private func desenharDiaItem(index: Int) -> some View {
-        let dia = listaDias[index]
-        let eHoje = Calendar.current.isDateInToday(dia.data)
+    private func drawDayItem(index: Int) -> some View {
+        let day = listOfDays[index]
+        let isToday = Calendar.current.isDateInToday(day.date)
         
         VStack(spacing: 6) {
-            if dia.estaPreenchido {
+            if day.isFull {
                 TimelineView(.animation) { timeline in
                     let tempo = timeline.date.timeIntervalSinceReferenceDate
                     
                     let offsetSincronizado = sin(tempo * 2) * 4 - 4
                     Image("book.closed.fire")
                         .renderingMode(.original)
-                        .font(eHoje ? .system(size: 45) : .title)
+                        .font(isToday ? .system(size: 45) : .title)
                         .offset(y: offsetSincronizado)
                 }
             }
             
             VStack{
-                Text(dia.numeroDia)
-                    .font(eHoje ? .largeTitle : .title)
+                Text(day.numeroDia)
+                    .font(isToday ? .largeTitle : .title)
                     .bold()
                 
-                if eHoje {
+                if isToday {
                     Spacer()
                     Text("HOJE")
                         .font(.body)
@@ -89,9 +89,9 @@ struct Carousel: View {
                 
             }
             .padding(.vertical)
-            .frame(width: eHoje ? 100 : 50, height: eHoje ? 100 : 50)
+            .frame(width: isToday ? 100 : 50, height: isToday ? 100 : 50)
             .background {
-                ZCoreGlassView(estaPreenchido: dia.estaPreenchido)
+                ZCoreGlassView(isFull: day.isFull)
             }
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay {
@@ -107,44 +107,44 @@ struct Carousel: View {
             }
             .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 4)
         }
-        .frame(height: dia.estaPreenchido ? (eHoje ? 160 : 95) : 95, alignment: .bottom)
+        .frame(height: day.isFull ? (isToday ? 160 : 95) : 95, alignment: .bottom)
         .onTapGesture {
             withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
-                listaDias[index].estaPreenchido.toggle()
+                listOfDays[index].isFull.toggle()
             }
         }
     }
     
-    private func gerarUltimosDezDias() {
-        let calendario = Calendar.current
-        let hoje = calendario.startOfDay(for: Date())
-        var temporario: [DiaHistorico] = []
+    private func lastTenDaysGenerator() {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        var temp: [DayHistory] = []
         
-        let alcance = 5
+        let rowRange = 5
         
-        for i in -alcance...alcance {
-            if let data = calendario.date(byAdding: .day, value: i, to: hoje) {
-                var novoDia = DiaHistorico(data: data)
+        for i in -rowRange...rowRange {
+            if let date = calendar.date(byAdding: .day, value: i, to: today) {
+                var newDay = DayHistory(date: date)
                 
                 if i < 0{
-                    novoDia.estaPreenchido = true
+                    newDay.isFull = true
                 }
-                temporario.append(novoDia)
+                temp.append(newDay)
             }
         }
         
-        self.listaDias.append(contentsOf: temporario)
+        self.listOfDays.append(contentsOf: temp)
     }
     
     private struct ZCoreGlassView: View {
-        let estaPreenchido: Bool
+        let isFull: Bool
         
         var body: some View {
             ZStack {
                 Color.clear
                     .background(.ultraThinMaterial)
-                let corBase = estaPreenchido ? Color.action : Color.toDo
-                corBase.opacity(estaPreenchido ? 1 : 0.9)
+                let baseColor = isFull ? Color.action : Color.toDo
+                baseColor.opacity(isFull ? 1 : 0.9)
                 
                 LinearGradient(
                     colors: [.white.opacity(0.25), .white.opacity(0.0)],
