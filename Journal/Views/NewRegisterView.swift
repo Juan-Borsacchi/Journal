@@ -120,7 +120,6 @@ struct NewRegisterView: View {
             
             ToolbarItem(placement: .confirmationAction) {
                 Button("Salvar", systemImage: "checkmark") {
-                    // A FAZER: Salvar a nota
                     dismiss()
                 }
                 .disabled(title.isEmpty && body_.isEmpty)

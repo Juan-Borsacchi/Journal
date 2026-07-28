@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AppTab: Hashable {
-    case inicio, diario, rotinas, search//, newEntry
+    case inicio, diario, rotinas, search
 }
 
 enum Route: Hashable {
@@ -23,13 +23,11 @@ final class Router {
     var inicioPath: [Route] = []
     var diarioPath: [Route] = []
     var rotinasPath: [Route] = []
-    
-    //var showNewEntry: Bool = false
-    
+        
     var pendingDiaryCategory: TypeDiary?
     
     func openDiary(_ category: TypeDiary) {
-        diarioPath.removeAll() // para sempre cair na raiz
+        diarioPath.removeAll()
         pendingDiaryCategory = category
         selectedTab = .diario
     }
@@ -42,7 +40,7 @@ final class Router {
             diarioPath.removeAll()
         case .rotinas:
             rotinasPath.removeAll()
-        case .search/*, .newEntry*/:
+        case .search:
             break
         }
     }
@@ -55,8 +53,8 @@ final class Router {
             diarioPath.append(route)
         case .rotinas:
             rotinasPath.append(route)
-        case .search/*, .newEntry*/:
-            inicioPath.append(route) // fallback de segurança
+        case .search:
+            inicioPath.append(route)
         }
     }
 }
