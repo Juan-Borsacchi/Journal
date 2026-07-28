@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct InicioView: View {
+struct HomeView: View {
     var body: some View {
         ListOf()
     }
 }
 
 #Preview {
-    InicioView()
+    HomeView()
         .environment(Router())
 }

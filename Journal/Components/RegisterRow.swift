@@ -49,9 +49,9 @@ struct RegisterRow: View {
             case "Compartilhadas":
                 router.openDiary(.shared)
             case "Rotinas":
-                router.selectedTab = .rotinas
+                router.selectedTab = .routine
             default:
-                router.selectedTab = .diario
+                router.selectedTab = .diary
             }
         }
     }

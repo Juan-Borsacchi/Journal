@@ -11,8 +11,8 @@ import SwiftUI
 final class DiaryViewModel {
 
     var tab: TypeDiary = .diary
-    var ordenacaoAtual = "Padrão (Data de Edição)"
-    var agrupacaoAtual = "Padrão (Ativado)"
+    var currentOrder = "Padrão (Data de Edição)"
+    var currentGroup = "Padrão (Ativado)"
 
     var diaryFilter: [Register] {
 

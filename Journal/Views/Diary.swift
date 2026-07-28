@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DiarioView: View {
+struct DiaryView: View {
     @Environment(Router.self) private var router
     @State private var viewModel = DiaryViewModel()
     
@@ -39,14 +39,14 @@ struct DiarioView: View {
             
             ToolbarItem(placement: .topBarTrailing){
                 Button{
-                    router.selectedTab = .diario
-                    router.diarioPath.append(.newEntry)
+                    router.selectedTab = .diary
+                    router.diaryPath.append(.newEntry)
                 } label: {
                     Image(systemName: "square.and.pencil")
                 }
             }
             ToolbarItem(placement: .topBarTrailing){
-                DiaryMenu(ordenacaoAtual: $viewModel.ordenacaoAtual, agrupacaoAtual: $viewModel.agrupacaoAtual)
+                DiaryMenu(currentOrder: $viewModel.currentOrder, currentGroup: $viewModel.currentGroup)
             }
             
         }
@@ -62,6 +62,6 @@ struct DiarioView: View {
 }
 
 #Preview {
-    DiarioView()
+    DiaryView()
         .environment(Router())
 }

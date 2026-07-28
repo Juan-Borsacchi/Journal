@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Color {
-    static let appBackground = Color.backGround
+    static let appBackground = Color.background
     static let appRow = Color.cardBackground
     static let appAccent = Color.action
 }

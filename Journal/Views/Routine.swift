@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RotinasView: View {
+struct RoutineView: View {
     var body: some View {
         VStack {
             Text("Rotinas")
@@ -18,5 +18,5 @@ struct RotinasView: View {
 }
 
 #Preview {
-    RotinasView()
+    RoutineView()
 }

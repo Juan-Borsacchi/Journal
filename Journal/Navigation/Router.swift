@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AppTab: Hashable {
-    case inicio, diario, rotinas, search
+    case home, diary, routine, search
 }
 
 enum Route: Hashable {
@@ -18,28 +18,28 @@ enum Route: Hashable {
 
 @Observable
 final class Router {
-    var selectedTab: AppTab = .inicio
+    var selectedTab: AppTab = .home
     
-    var inicioPath: [Route] = []
-    var diarioPath: [Route] = []
-    var rotinasPath: [Route] = []
+    var homePath: [Route] = []
+    var diaryPath: [Route] = []
+    var routinePath: [Route] = []
         
     var pendingDiaryCategory: TypeDiary?
     
     func openDiary(_ category: TypeDiary) {
-        diarioPath.removeAll()
+        diaryPath.removeAll()
         pendingDiaryCategory = category
-        selectedTab = .diario
+        selectedTab = .diary
     }
     
     func popToRoot(_ tab: AppTab) {
         switch tab {
-        case .inicio:
-            inicioPath.removeAll()
-        case .diario:
-            diarioPath.removeAll()
-        case .rotinas:
-            rotinasPath.removeAll()
+        case .home:
+            homePath.removeAll()
+        case .diary:
+            diaryPath.removeAll()
+        case .routine:
+            routinePath.removeAll()
         case .search:
             break
         }
@@ -47,14 +47,14 @@ final class Router {
     
     func push(_ route: Route, on tab: AppTab) {
         switch tab {
-        case .inicio:
-            inicioPath.append(route)
-        case .diario:
-            diarioPath.append(route)
-        case .rotinas:
-            rotinasPath.append(route)
+        case .home:
+            homePath.append(route)
+        case .diary:
+            diaryPath.append(route)
+        case .routine:
+            routinePath.append(route)
         case .search:
-            inicioPath.append(route)
+            homePath.append(route)
         }
     }
 }

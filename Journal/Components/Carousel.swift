@@ -76,7 +76,7 @@ struct Carousel: View {
             }
             
             VStack{
-                Text(day.numeroDia)
+                Text(day.dayNumber)
                     .font(isToday ? .largeTitle : .title)
                     .bold()
                 

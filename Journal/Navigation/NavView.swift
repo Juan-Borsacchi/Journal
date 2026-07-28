@@ -16,31 +16,31 @@ struct NavView: View {
 
         TabView(selection: $router.selectedTab) {
             
-            Tab(value: AppTab.inicio) {
-                NavigationStack(path: $router.inicioPath) {
-                    InicioView()
+            Tab(value: AppTab.home) {
+                NavigationStack(path: $router.homePath) {
+                    HomeView()
                         .navigationDestination(for: Route.self, destination: destination)
                 }
             } label: {
-                tablabel("Início", "house", for: .inicio)
+                tablabel("Início", "house", for: .home)
             }
             
-            Tab(value: AppTab.diario) {
-                NavigationStack(path: $router.diarioPath) {
-                    DiarioView()
+            Tab(value: AppTab.diary) {
+                NavigationStack(path: $router.diaryPath) {
+                    DiaryView()
                         .navigationDestination(for: Route.self, destination: destination)
                 }
             } label: {
-                tablabel("Diário", "book.pages", for: .diario)
+                tablabel("Diário", "book.pages", for: .diary)
             }
             
-            Tab(value: AppTab.rotinas) {
-                NavigationStack(path: $router.rotinasPath) {
-                    RotinasView()
+            Tab(value: AppTab.routine) {
+                NavigationStack(path: $router.routinePath) {
+                    RoutineView()
                         .navigationDestination(for: Route.self, destination: destination)
                 }
             } label: {
-                tablabel("Rotinas", "square.stack.3d.up", for: .rotinas)
+                tablabel("Rotinas", "square.stack.3d.up", for: .routine)
             }
 
             Tab(value: AppTab.search, role: .search) {

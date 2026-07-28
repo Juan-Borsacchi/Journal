@@ -12,7 +12,7 @@ struct DayHistory: Identifiable {
     let date: Date
     var isFull: Bool = false
     
-    var numeroDia: String {
+    var dayNumber: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "d"
         return formatter.string(from: date)

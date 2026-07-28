@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//import Combine
 
 struct Register: Hashable, Identifiable {
     let id: UUID = UUID()

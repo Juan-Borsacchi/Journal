@@ -33,8 +33,8 @@ struct ListOf: View {
         .toolbar{
             ToolbarItem(placement: .topBarTrailing){
                 Button{
-                    router.selectedTab = .inicio
-                    router.inicioPath.append(.newEntry)
+                    router.selectedTab = .home
+                    router.homePath.append(.newEntry)
                 } label: {
                     Image(systemName: "square.and.pencil")
                 }

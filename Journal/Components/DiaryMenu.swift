@@ -10,8 +10,8 @@ import SwiftUI
 struct DiaryMenu: View {
 
     @Environment(\.colorScheme) private var colorScheme
-    @Binding var ordenacaoAtual: String
-    @Binding var agrupacaoAtual: String
+    @Binding var currentOrder: String
+    @Binding var currentGroup: String
 
     var body: some View {
         Menu {
@@ -30,7 +30,7 @@ struct DiaryMenu: View {
             }
 
             Menu {
-                Picker("Ordenar por", selection: $ordenacaoAtual) {
+                Picker("Ordenar por", selection: $currentOrder) {
                     Section {
                         Text("Padrão (Data de Edição)").tag("Padrão (Data de Edição)")
                         Text("Data de Edição").tag("Data de Edição")
@@ -44,19 +44,19 @@ struct DiaryMenu: View {
                 }
             } label: {
                 Text("Ordenar por")
-                Text(ordenacaoAtual)
+                Text(currentOrder)
                 Image(systemName: "arrow.up.arrow.down")
             }
 
             Menu {
-                Picker("Agrupar por Data", selection: $agrupacaoAtual) {
+                Picker("Agrupar por Data", selection: $currentGroup) {
                     Text("Padrão (Ativado)").tag("Padrão (Ativado)")
                     Text("Ativado").tag("Ativado")
                     Text("Desativado").tag("Desativado")
                 }
             } label: {
                 Text("Agrupar por Data")
-                Text(agrupacaoAtual)
+                Text(currentGroup)
                 Image(systemName: "calendar")
             }
         } label: {
