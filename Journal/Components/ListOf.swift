@@ -8,34 +8,57 @@
 import SwiftUI
 
 struct ListOf: View {
-    @State private var singleSelection: UUID?
+    @Environment(Router.self) private var router
+    @Environment(\.editMode) private var editMode
     
     var body: some View {
-        NavigationView {
-            List(selection: $singleSelection) {
-                
-                Text("Aqui vai o Dashboard")
-                
-                ForEach(registerTypes) { type in
-                    Section(header: Text("\(type.type)").font(.title3).fontWeight(.bold).foregroundStyle(.primary)){
-                        ForEach(type.listOfRegisters) { item in
-                            VStack(alignment: .leading) {
-                                Text(item.title)
-                                    .font(item.subtitle == nil ? .body : .headline)
-                                Text(item.subtitle ?? "")
-                                    .font(.subheadline)
-                            }
-                            .badge(item.lock == true ? "\(Image(systemName: "lock"))" : "")
-                            .badge(item.subtitle == nil ? "\(Image(systemName: "chevron.right"))" : "")
-                        }
+        List {
+            
+            Section(header: sectionHeader("Sequência de registros")) {
+                    Carousel()
+                        .listRowInsets(EdgeInsets())
+                }
+            
+            ForEach(registerTypes) { type in
+                Section(header: sectionHeader(type.type)){
+                    ForEach(type.listOfRegisters) { item in
+                        RegisterRow(type: type, item: item)
                     }
                 }
             }
-            .navigationTitle("Seus Registros")
+            .rowBackground()
         }
+        .navigationTitle("Seus Registros")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar{
+            ToolbarItem(placement: .topBarTrailing){
+                Button{
+                    router.selectedTab = .home
+                    router.homePath.append(.newEntry)
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                }
+            }
+            ToolbarItem(placement: .topBarTrailing){
+                Image(systemName: "ellipsis")
+            }
+        }
+        
+        .appBackground()
+        
+    }
+    
+    private func sectionHeader(_ text: String) -> some View {
+        Text(text)
+            .font(.title3)
+            .fontWeight(.bold)
+            .foregroundColor(Color.primary)
     }
 }
 
 #Preview {
-    ListOf()
+    NavigationStack {
+        ListOf()
+    }
+    .environment(Router())
 }

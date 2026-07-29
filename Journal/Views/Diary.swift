@@ -1,0 +1,67 @@
+//
+//  Untitled.swift
+//  Journal
+//
+//  Created by Igor Carrasco on 15/07/26.
+//
+
+import SwiftUI
+
+struct DiaryView: View {
+    @Environment(Router.self) private var router
+    @State private var viewModel = DiaryViewModel()
+    
+    var body: some View {
+        
+        VStack {
+
+            DiaryPicker(
+                tab: $viewModel.tab
+            )
+            .padding(.top, 10)
+            .padding(.horizontal)
+            
+            List {
+                Section {
+                    ForEach(viewModel.diaryFilter) { item in
+                        NavigationLink(value: Route.detail(id: item.id)) {
+                            RowContent(item: item)
+                        }
+                    }
+                }
+                .rowBackground()
+            }
+            .animation(.bouncy, value: viewModel.tab)
+        }
+        .navigationTitle("Diário")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar{
+            
+            ToolbarItem(placement: .topBarTrailing){
+                Button{
+                    router.selectedTab = .diary
+                    router.diaryPath.append(.newEntry)
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                }
+            }
+            ToolbarItem(placement: .topBarTrailing){
+                DiaryMenu(currentOrder: $viewModel.currentOrder, currentGroup: $viewModel.currentGroup)
+            }
+            
+        }
+        .appBackground()
+        .onChange(of: router.pendingDiaryCategory, initial: true) { _, category in
+            guard let category else { return }
+            withAnimation(.snappy) {
+                viewModel.tab = category
+            }
+            router.pendingDiaryCategory = nil
+        }
+    }
+}
+
+#Preview {
+    DiaryView()
+        .environment(Router())
+}
