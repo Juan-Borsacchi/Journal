@@ -50,7 +50,7 @@ struct NavView: View {
                 }
             }
         }
-        .tint(.black)
+        .tint(.icons)
     }
     
     private func tablabel(_ title: String, _ symbol: String, for tab: AppTab) -> some View {
